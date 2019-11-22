@@ -11,6 +11,8 @@ packages = [
 SCRIPT_DIR = os.path.realpath(os.path.dirname(__file__))
 TOMCAT_DIR = os.path.join('/opt', 'tomcat')
 TOMCAT_SERVICE_PATH = os.path.join('/etc', 'systemd', 'system', 'tomcat.service')
+DEFAULT_TOMCAT_TAR = "https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz"
+
 
 def install_packages(packages):
     run("apt install -y "+ ' '.join(packages))
@@ -39,7 +41,7 @@ def download_tomcat():
     else:
         os.mkdir(tomcat_dir)
 
-    tomcat_tar = "https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.22/bin/apache-tomcat-9.0.22.tar.gz"
+    tomcat_tar = DEFAULT_TOMCAT_TAR
     os.chdir('/tmp')
     run("curl -O {}".format(tomcat_tar))
     tar_file = os.path.basename(tomcat_tar)
